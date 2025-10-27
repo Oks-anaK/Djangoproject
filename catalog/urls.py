@@ -8,7 +8,7 @@ from catalog.views import answer
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path('home/', home, name='home'),
-    path('contacts/', contacts, name='contacts'),
-    path('answer/', answer, name='answer')
+    path("home/", home, name="home"),
+    path("contacts/", contacts, name="contacts"),
+    path("answer/", answer, name="answer"),
 ]
