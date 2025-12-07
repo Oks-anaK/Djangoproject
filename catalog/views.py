@@ -4,10 +4,6 @@ from catalog.models import Product
 from django.shortcuts import get_object_or_404
 
 
-def home(request):
-    return render(request, "home.html")
-
-
 def contacts(request):
     return render(request, "contacts.html")
 

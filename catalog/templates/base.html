@@ -1,5 +1,5 @@
+<!doctype html>
 {% load static %}
-<!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
   <meta charset="utf-8">
@@ -90,21 +90,17 @@
 <main>
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto"><h1 class="fw-light">Канцмаркет</h1>
-        <p class="lead text-body-secondary">Магазин торговой сети.</p>
-        <p><a href="#" class="btn btn-primary my-2">Main call to action</a> <a href="#" class="btn btn-secondary my-2">Secondary
-          action</a></p></div>
+      <div class="col-lg-6 col-md-8 mx-auto"><h1 class="fw-light">УниверсалСтор</h1>
+        <p class="lead text-body-secondary">Универсальный интернет-магазин для активной жизни и развития.</p>
+        </div>
     </div>
   </section>
   {% block content %}
   {% endblock %}
 </main>
-<footer class="text-body-secondary py-5">
-  <div class="container"><p class="float-end mb-1"><a href="#">Back to top</a></p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-            href="/docs/5.3/getting-started/introduction">getting started guide</a>.</p></div>
-</footer>
+<div class=container>
+  {% include 'includes/inc_footer.html' %}
+  </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"
         class="astro-vvvwv3sm"></script>
 </body>
