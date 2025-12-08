@@ -11,7 +11,7 @@ class Post(models.Model):
         verbose_name="Содержимое поста", help_text="Введите содержимое поста."
     )
     preview = models.ImageField(
-        upload_to="catalog/preview",
+        upload_to="blog/preview",
         blank=True,
         null=True,
         verbose_name="Изображение поста",
