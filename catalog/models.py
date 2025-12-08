@@ -44,7 +44,7 @@ class Product(models.Model):
     view_counter = models.PositiveIntegerField(
         verbose_name="Счетчик просмотров",
         help_text="Укажите количество просмотров.",
-        default=0
+        default=0,
     )
 
     class Meta:

@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load blog_tags %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for post in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ post.preview | media_filter }}" class="img-fluid">
+                    <div class="card-body"><p class="card-text">{{ post.title }}</p>
+                        <p class="card-text">{{ post.content | truncatechars:100 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group" role="group" aria-label="Default button group">
+                                <a class="btn btn-outline-primary" href="{% url 'blog:posts_detail' post.pk %}"
+                                   role="button">Узнать
+                                    больше...</a>
+                                <a class="btn btn-outline-primary" href="{% url 'blog:posts_update' post.pk %}"
+                                   role="button">Редактировать</a>
+                                <a class="btn btn-outline-primary" href="{% url 'blog:posts_delete' post.pk %}"
+                                   role="button">Удалить</a>
+                            </div>
+                            <small class="text-body-secondary"></small></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
