@@ -41,6 +41,11 @@ class Product(models.Model):
         verbose_name="Дата последнего изменения товара",
         help_text="Добавьте дату последнего изменения товара.",
     )
+    view_counter = models.PositiveIntegerField(
+        verbose_name="Счетчик просмотров",
+        help_text="Укажите количество просмотров.",
+        default=0
+    )
 
     class Meta:
         verbose_name = "Товар"

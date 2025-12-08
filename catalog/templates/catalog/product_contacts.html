@@ -9,10 +9,15 @@
 </head>
 <body>
 <header data-bs-theme="dark">
-{% include 'includes/inc_menu.html' %}
+{% include 'catalog/includes/inc_menu.html' %}
 </header>
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Контакты</h1>
+    {% if success_message %}
+    <div class="alert alert-success" role="alert">
+        {{ success_message }}
+    </div>
+    {% endif %}
 </div>
 
 <div class="container">
@@ -31,7 +36,7 @@
                         </tr>
                         <tr>
                             <td class="w-25">Адрес</td>
-                            <td>Moscow, 98052-6399</td>
+                            <td>Moscow, 55.75396, 37.62039</td>
                         </tr>
                     </table>
                 </div>
@@ -43,7 +48,7 @@
                     <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/answer/" class="form-floating">
+                    <form method="post" action="/contacts/" class="form-floating">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="name">Имя</label>
