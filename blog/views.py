@@ -1,3 +1,4 @@
+from blog.forms import PostForm
 from blog.models import Post
 from django.views.generic import (
     ListView,
@@ -30,27 +31,13 @@ class PostDetailView(DetailView):
 
 class PostCreateView(CreateView):
     model = Post
-    fields = (
-        "title",
-        "content",
-        "preview",
-        "created_at",
-        "published_is",
-        "view_counter",
-    )
+    form_class = PostForm
     success_url = reverse_lazy("blog:posts_list")
 
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = (
-        "title",
-        "content",
-        "preview",
-        "created_at",
-        "published_is",
-        "view_counter",
-    )
+    form_class = PostForm
     success_url = reverse_lazy("blog:posts_list")
 
     def get_success_url(self):
