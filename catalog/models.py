@@ -29,6 +29,12 @@ class Product(models.Model):
     price = models.IntegerField(
         verbose_name="Цена товара", help_text="Введите стоимость товара."
     )
+
+    delivery_option_is = models.BooleanField(
+        verbose_name="Возможность доставки",
+        help_text="Отметьте галочкой, если есть возможность доставки товара.",
+        default=False,
+    )
     created_at = models.DateField(
         blank=True,
         null=True,

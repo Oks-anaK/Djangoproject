@@ -1,0 +1,92 @@
+from django.forms import ModelForm, BooleanField, CheckboxInput, FileInput
+from django.core.exceptions import ValidationError
+
+from catalog.models import Product
+
+forbidden_words = [
+    "казино",
+    "криптовалюта",
+    "крипта",
+    "биржа",
+    "дешево",
+    "бесплатно",
+    "обман",
+    "полиция",
+    "радар",
+]
+
+
+class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, BooleanField) or isinstance(
+                field.widget, CheckboxInput
+            ):
+                field.widget.attrs["class"] = "form-check-input"
+
+            elif isinstance(field.widget, FileInput):
+                field.widget.attrs["class"] = "form-control"
+
+            else:
+                field.widget.attrs["class"] = "form-control"
+                # Используем help_text как placeholder для текстовых полей
+                if field.help_text:
+                    field.widget.attrs["placeholder"] = field.help_text
+                    field.help_text = ""
+
+
+class ProductForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        exclude = ("view_counter",)
+
+    def clean_name(self):
+        name = self.cleaned_data.get("name")
+        name_lower = name.lower()
+
+        for word in forbidden_words:
+            if word in name_lower:
+                raise ValidationError(
+                    "Выбранное вами слово запрещено для использования."
+                )
+
+        return name
+
+    def clean_description(self):
+        description = self.cleaned_data.get("description")
+        description_lower = description.lower()
+
+        for word in forbidden_words:
+            if word in description_lower:
+                raise ValidationError(
+                    "Выбранное вами слово запрещено для использования."
+                )
+
+        return description
+
+    def clean_price(self):
+        price = self.cleaned_data.get("price")
+
+        if price < 0:
+            raise ValidationError("Цена продукта не может быть отрицательной.")
+        return price
+
+    def clean_image(self):
+        image = self.cleaned_data.get("image")
+        
+        if image:
+
+            allowed_formats = ['image/jpeg', 'image/jpg', 'image/png']
+            if image.content_type not in allowed_formats:
+                raise ValidationError(
+                    "Формат изображения должен быть JPEG или PNG."
+                )
+
+            max_size = 5 * 1024 * 1024  # 5 МБ в байтах
+            if image.size > max_size:
+                raise ValidationError(
+                    "Размер изображения не должен превышать 5 МБ."
+                )
+        
+        return image
