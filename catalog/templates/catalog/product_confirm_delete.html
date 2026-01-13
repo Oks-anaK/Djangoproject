@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
+            {% if object.owner == user or perms.catalog.delete_product %}
             <form class="row" method="post" enctype="multipart/form-data">
                 <div class="card">
                     <p class="card-text">Вы действительно хотите удалить {{ object.name }}?</p>
@@ -16,6 +17,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
         </div>
     </div>
 </div>
