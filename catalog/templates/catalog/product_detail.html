@@ -9,7 +9,12 @@
             <img src="{{ product.image | media_filter }}" class="img-fluid">
             <div class="card-body">
               <p class="card-text">{{ object.name }}</p>
+              {% if object.category %}
               <p class="card-text">Категория: {{ object.category }}</p>
+              <div class="mb-3">
+              <a class="btn-outline-primary" href="{% url 'catalog:products_category' object.category.pk %}" role="button">Посмотреть товары этой категории</a>
+                </div>
+              {% endif %}
               <p class="card-text">{{ object.description }}</p>
               <p class="card-text">{{ object.price }} рублей.</p>
               <p class="card-text">Возможность доставки: {% if object.delivery_option_is %}
@@ -17,9 +22,10 @@
                 {% else %}
                 Нет
                 {% endif %}</p>
+              <p class="card-text">Публикация: </p>
               {% if perms.catalog.can_unpublish_product %}
-              <div class="btn-group">
-                  <a class="btn btn-primary" href="{% url 'catalog:product_unpublish' object.pk %}" role="button">Отмена публикации</a>
+              <div class="mb-3">
+                  <a class="btn-outline-primary" href="{% url 'catalog:product_unpublish' object.pk %}" role="button">Отмена публикации</a>
                 </div>
               {% endif %}
               <p class="card-text">Создано: {{ object.created_at | date:"d M Y" | default:"Дата создания не указана."}}</p>
@@ -30,7 +36,6 @@
                   <a class="btn btn-primary" href="{% url 'catalog:products_update' object.pk %}" role="button">Редактировать</a>
                 </div>
                 {% endif %}
-
                 {% if object.owner == user or perms.catalog.delete_product %}
                 <div class="btn-group">
                   <a class="btn btn-danger" href="{% url 'catalog:products_delete' object.pk %}"

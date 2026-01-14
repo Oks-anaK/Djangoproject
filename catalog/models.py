@@ -67,7 +67,7 @@ class Product(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name = 'products',
+        related_name="products",
     )
 
     class Meta:
