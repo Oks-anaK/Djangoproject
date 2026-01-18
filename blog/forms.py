@@ -57,19 +57,15 @@ class PostForm(StyleFormMixin, ModelForm):
 
     def clean_preview(self):
         preview = self.cleaned_data.get("preview")
-        
+
         if preview:
 
-            allowed_formats = ['image/jpeg', 'image/jpg', 'image/png']
+            allowed_formats = ["image/jpeg", "image/jpg", "image/png"]
             if preview.content_type not in allowed_formats:
-                raise ValidationError(
-                    "Формат изображения должен быть JPEG или PNG."
-                )
+                raise ValidationError("Формат изображения должен быть JPEG или PNG.")
 
             max_size = 5 * 1024 * 1024  # 5 МБ в байтах
             if preview.size > max_size:
-                raise ValidationError(
-                    "Размер изображения не должен превышать 5 МБ."
-                )
-        
+                raise ValidationError("Размер изображения не должен превышать 5 МБ.")
+
         return preview
